@@ -1,0 +1,25 @@
+class Solution {
+    public int maxArea(int[] height) {
+        int ans = 0;
+        for(int i=0; i<height.length;i++)
+        {
+            for(int j=i+1; j<height.length; j++)
+            {
+                if(ans<getArea(height,i,j))
+                    ans = getArea(height,i,j);
+            }
+        }
+        return ans;
+    }
+    
+    public int getArea(int[] height, int i, int j)
+    {
+        int l,h;
+        h = Math.min(height[i],height[j]);
+        if(i>j)
+            l=i-j;
+        else
+            l=j-i;
+        return l*h;
+    }
+}
