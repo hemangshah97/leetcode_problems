@@ -1,0 +1,43 @@
+class Solution {
+    public String convert(String s, int numRows) {
+        int n = (numRows-1)*2;
+        int m=n;
+        char[] tmp = new char[s.length()];
+        boolean flag=true;
+        int k=0, i=0;
+        int x;
+        if(numRows==1)
+            return s;
+        while(k<s.length())
+        {
+            flag=true;
+            x=i;
+            while(x<s.length())
+            {
+                if(m==n || m==0)
+                {
+                    tmp[k++]=s.charAt(x);
+                    System.out.println(s.charAt(x));
+                    x+=n;
+                }
+                else if(flag)
+                {
+                    tmp[k++]=s.charAt(x);
+                    System.out.println(s.charAt(x));
+                    x+=m;
+                    flag=!flag;
+                }
+                else
+                {
+                    tmp[k++]=s.charAt(x);
+                    System.out.println(s.charAt(x));
+                    x+=(n-m);
+                    flag=!flag;
+                }
+            }
+            i++;
+            m-=2;
+        }
+        return String.valueOf(tmp);
+    }
+}
