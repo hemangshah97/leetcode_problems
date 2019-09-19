@@ -1,0 +1,62 @@
+class Solution {
+    public int myAtoi(String str) {
+        boolean neg = false, numstarted=false, signset=false;
+        //long ans=0, prevans=0;
+        int ans=0, prevans=0;
+        int i=0;
+        char x;
+        str=str.trim();
+        while(i<str.length())
+        {
+            x=str.charAt(i);
+            if(Character.isLetter(x) && !numstarted)
+                return 0;
+            else if(x=='-' && !signset && !numstarted)
+            {
+                neg=true;
+                signset=true;
+            }
+            else if(x=='+' && !signset && !numstarted)
+            {
+                neg=false;
+                signset=true;
+            }
+            else if(!Character.isDigit(x))
+                break;
+            else if(Character.isDigit(x))
+            {
+                prevans=ans;
+                numstarted=true;
+                int a = x-'0';
+                ans = (ans*10) + a;
+                //ret = (ret*10) + a;
+                if(((ans-a)/10)!=prevans)
+                {
+                    System.out.println("hi");
+                    if(neg)
+                    {
+                        
+                        ans = Integer.MIN_VALUE;
+                    }
+                    else
+                    {
+                        
+                        ans = Integer.MAX_VALUE;
+                    }
+                    break;
+                }
+            }
+            i++;
+        }
+        if(neg)
+            ans*=-1;
+        if(ans==Integer.MIN_VALUE && !neg)
+            ans = Integer.MAX_VALUE;
+        else if(ans==Integer.MAX_VALUE && neg)
+            ans = Integer.MIN_VALUE;
+        //else if(ans>Integer.MAX_VALUE)
+        //    ret = Integer.MAX_VALUE;
+
+        return ans;
+    }
+}
