@@ -1,0 +1,90 @@
+class Solution {
+    public String intToRoman(int num) {
+        String ans = new String();
+        int divider = 1000;
+        int a=0;
+        while(num>0)
+        {
+            a=num/divider;
+            ans = addRoman(ans,a,divider);
+            num=num%divider;
+            divider/=10;
+        }
+        return ans;
+    }
+    
+    public String addRoman(String ans, int a, int div)
+    {
+        if(a==0)
+            return ans;
+        else 
+        {
+            if(div==1000)
+            {
+                for(int i=0;i<a;i++)
+                    ans = ans + "M";
+            }
+            else if(div==100)
+            {
+                if(a==9)
+                    ans = ans + "CM";
+                else if(a>=5)
+                {
+                    ans+="D";
+                    for(int i=0;i<a-5;i++)
+                        ans+="C";
+                }
+                else if(a==4)
+                {
+                    ans = ans + "CD";
+                }
+                else 
+                {
+                    for(int i=0; i<a;i++)
+                        ans = ans + "C";
+                }
+            }
+            else if(div == 10)
+            {
+                if(a==9)
+                    ans = ans + "XC";
+                else if(a>=5)
+                {
+                    ans+="L";
+                    for(int i=0;i<a-5;i++)
+                        ans+="X";
+                }
+                else if(a==4)
+                {
+                    ans = ans + "XL";
+                }
+                else 
+                {
+                    for(int i=0; i<a;i++)
+                        ans = ans + "X";
+                }
+            }
+            else
+            {
+                if(a==9)
+                    ans = ans + "IX";
+                else if(a>=5)
+                {
+                    ans+="V";
+                    for(int i=0;i<a-5;i++)
+                        ans+="I";
+                }
+                else if(a==4)
+                {
+                    ans = ans + "IV";
+                }
+                else 
+                {
+                    for(int i=0; i<a;i++)
+                        ans = ans + "I";
+                }
+            }
+        }
+        return ans;
+    }
+}
