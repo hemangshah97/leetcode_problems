@@ -1,0 +1,21 @@
+class Solution {
+    public int romanToInt(String s) {
+        HashMap<Character,Integer> vars = new HashMap();
+        vars.put('I',1);
+        vars.put('V',5);
+        vars.put('X',10);
+        vars.put('L',50);
+        vars.put('C',100);
+        vars.put('D',500);
+        vars.put('M',1000);
+        int ans=vars.get(s.charAt(s.length()-1));
+        for(int i=s.length()-2; i>=0; i--)
+        {
+            if((vars.get(s.charAt(i))<vars.get(s.charAt(i+1))) && ans!=0)
+                ans-=vars.get(s.charAt(i));
+            else
+                ans+=vars.get(s.charAt(i));
+        }
+        return ans;
+    }
+}
