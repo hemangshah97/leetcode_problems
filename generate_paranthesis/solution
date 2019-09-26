@@ -1,0 +1,20 @@
+class Solution {
+    public List<String> generateParenthesis(int n) {
+        List<String> ans = new ArrayList<>();
+        backtrack(ans,"",0,0,n);
+        return ans;
+    }
+    
+    public void backtrack(List<String> ans, String cur, int open, int close, int m)
+    {
+        if(cur.length()==m*2)
+        {
+            ans.add(cur);
+            return;
+        }
+        if(open<m)
+            backtrack(ans,cur+"(",open+1,close,m);
+        if(close<open)
+            backtrack(ans,cur+")",open,close+1,m);
+    }
+}
