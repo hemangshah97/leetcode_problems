@@ -1,0 +1,32 @@
+class Solution {
+    public int removeElement(int[] nums, int val) {
+        if(nums.length==0)
+            return 0;
+        if(nums.length==1 && nums[0]==val)
+            return 0;
+        int len = nums.length;
+        Arrays.sort(nums);
+        for(int i=0;i<len;i++)
+        {
+            if(nums[i]!=val)
+                continue;
+            int k=1;
+            int j=i+1;
+            for(; j<nums.length;j++)
+            {
+                if(nums[j]==nums[j-1])
+                    k++;
+                else 
+                    break;
+            }
+            while(j<nums.length)
+            {
+                nums[j-k]=nums[j];
+                j++;
+            }
+            len-=k;
+            break;
+        }
+        return len;
+    }
+}
