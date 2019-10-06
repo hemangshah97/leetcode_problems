@@ -1,0 +1,46 @@
+class Solution {
+    public List<Integer> findSubstring(String s, String[] words) {
+        List<Integer> result = new ArrayList<>();
+        if(words.length==0 || s.length()==0)
+            return result;
+        List<String> w = new ArrayList<>(Arrays.asList(words));
+        int len = words[0].length();
+        if(s.length()<w.size()*len)
+            return result;
+        if(s.length()==len && words.length == 1 && w.contains(s))
+        {
+            result.add(0);
+            return result;
+        }
+        for(int i=0; i<s.length()-len; i++)
+        {
+            if(w.contains(s.substring(i,i+len)))
+            {
+                boolean success=true;
+                List<String> checked = new ArrayList<>(Arrays.asList(words));
+                checked.remove(s.substring(i,i+len));
+                int j=i+len;
+                int count=1;
+                while(count<w.size())
+                {
+                    if(j>s.length()-len)
+                    {
+                        success=false;
+                        break;
+                    }
+                    if(!checked.contains(s.substring(j,j+len)))
+                    {
+                        success=false;
+                        break;
+                    }
+                    checked.remove(s.substring(j,j+len));
+                    j+=len;
+                    count++;
+                }
+                if(success)
+                    result.add(i);
+            }
+        }
+        return result;
+    }
+}
