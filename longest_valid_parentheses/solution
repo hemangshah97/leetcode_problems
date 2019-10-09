@@ -1,0 +1,46 @@
+class Solution {
+    public int longestValidParentheses(String s) {
+        if(s.length()<=1)
+            return 0;
+        if(s.charAt(0)==')')
+            return longestValidParentheses(s.substring(1));
+        if(s.charAt(s.length()-1)=='(')
+            return longestValidParentheses(s.substring(0,s.length()-1));
+        List<Integer> stack = new ArrayList<>();
+        int top=-1;
+        for(int i=0; i<s.length(); i++)
+        {
+            if(s.charAt(i)=='(')
+            {
+                stack.add(i);
+                top++;
+            }
+            else
+            {
+                if(top>-1)
+                {
+                        stack.remove(top);
+                        top--;
+                }
+                else
+                {
+                    int right = longestValidParentheses(s.substring(i+1));
+                    if(right>i)
+                        return right;
+                    else
+                        return i;
+                }
+            }
+        }
+        if(top!=-1)
+        {
+            int left = longestValidParentheses(s.substring(0,stack.get(top)));
+            int right = longestValidParentheses(s.substring(stack.get(top)+1));
+            if(left>right)
+                return left;
+            else 
+                return right;
+        }
+        return s.length();
+    }
+}
