@@ -1,0 +1,22 @@
+class Solution {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> mainList = new ArrayList<>();
+        findSets(candidates,0, 0, target, new ArrayList<>(), mainList);
+        return mainList;
+        
+    }
+    public void findSets(int[] candidates,int ind, int sum, int target, List<Integer> list, List<List<Integer>> mainList)
+    {
+        if(sum==target)
+        {
+            mainList.add(new ArrayList<>(list));
+        }
+        for(int i=ind; i<candidates.length; i++)
+        {
+            list.add(candidates[i]);
+            if(sum+candidates[i]<=target)
+                findSets(candidates,i, sum+candidates[i], target,list,mainList);
+            list.remove(list.size()-1);
+        }
+    }
+}
