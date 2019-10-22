@@ -1,0 +1,28 @@
+class Solution {
+    public int trap(int[] height) {
+        if(height.length==0)
+            return 0;
+        int[] A = new int[height.length];
+        int[] B = new int[height.length];
+        int maxA = height[0];
+        int maxB = height[height.length-1];
+        for(int i=0; i<height.length;i++)
+        {
+            if(height[i]>maxA)
+                maxA=height[i];
+            A[i]=maxA;
+        }
+        for(int i=height.length-1;i>=0;i--)
+        {
+            if(height[i]>maxB)
+                maxB=height[i];
+            B[i]=maxB;
+        }
+        int ans=0;
+        for(int i=0; i<height.length; i++)
+        {
+            ans += (Math.min(A[i],B[i])-height[i]);
+        }
+        return ans;
+    }
+}
