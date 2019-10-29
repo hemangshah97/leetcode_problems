@@ -1,0 +1,29 @@
+class Solution {
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> finalList = new ArrayList<>();
+        find(finalList, new ArrayList<>(), nums, new boolean[nums.length]);
+        return finalList;
+    }
+    
+    void find(List<List<Integer>> finalList, List<Integer> cur, int[] nums, boolean[] used)
+    {
+        if(cur.size()==nums.length)
+        {
+            finalList.add(new ArrayList<>(cur));
+        }
+        for(int i=0; i<nums.length; i++)
+        {
+            if(used[i] || (i>0 && nums[i]==nums[i-1] && !used[i-1]))
+                continue;
+            else
+            {
+                cur.add(nums[i]);
+                used[i]=true;
+                find(finalList, cur, nums, used);
+                used[i]=false;
+                cur.remove(cur.size()-1);
+            }
+        }
+    }
+}
